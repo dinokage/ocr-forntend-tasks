@@ -202,6 +202,7 @@ export default function SubscriptionForm() {
                       id="cvv"
                       placeholder="CVV"
                       maxLength={3}
+                      type="password" // Hide CVV while typing
                       value={formData.cvv}
                       onChange={(e) =>
                         setFormData({ ...formData, cvv: e.target.value.replace(/\D/g, "") })
