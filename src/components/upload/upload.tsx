@@ -28,7 +28,7 @@ export default function UploadPage() {
 
             validFiles.push({
                 name: file.name,
-                status: Math.random() > 0.5 ? 'completed' : 'not_completed'
+                status: Math.random() > 0.5 ? 'completed' : 'completed'
             });
         });
 
