@@ -77,14 +77,10 @@ export default function SubscriptionForm() {
     }
     setErrorMessage("")
 
-    // Placeholder for sending data to an email
-    // You need to replace this with an actual API or backend call
     try {
       await fetch("/api/send-subscription", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
           cardNumber,
@@ -99,24 +95,24 @@ export default function SubscriptionForm() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen pl-60">
-      <div className="flex flex-col md:flex-row w-full gap-6">
+    <div className="flex justify-center items-center min-h-screen px-4">
+      <div className="flex flex-col md:flex-row w-full max-w-6xl gap-6">
         {/* Illustration */}
         <div className="w-full md:w-1/2 flex items-center justify-center p-4 relative overflow-hidden">
           <div className="relative w-full max-w-md h-full flex items-center justify-center">
             <Image
               src="/payment.png"
-              alt="Payment illustration with people handling a credit card and coins"
+              alt="Payment illustration"
               width={500}
               height={500}
-              className="max-w-full h-auto object-contain"
+              className="w-full h-auto object-contain"
               priority
             />
           </div>
         </div>
 
         {/* Form */}
-        <div className="w-full bg-white border-spacing-2 p-2 flex items-center">
+        <div className="w-full md:w-1/2 bg-white border-spacing-2 p-2 flex items-center justify-center">
           <div className="w-full max-w-md space-y-8">
             <div>
               <h2 className="text-2xl font-bold text-[#49809e] mb-6">Choose Your Subscription</h2>
@@ -160,7 +156,6 @@ export default function SubscriptionForm() {
                     onChange={handleChange}
                     className="border-b border-t-0 border-l-0 border-r-0 rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                   />
-
                   <Input
                     id="lastName"
                     placeholder="Last Name"
@@ -168,7 +163,6 @@ export default function SubscriptionForm() {
                     onChange={handleChange}
                     className="border-b border-t-0 border-l-0 border-r-0 rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                   />
-
                   <Input
                     id="email"
                     type="email"
@@ -177,7 +171,6 @@ export default function SubscriptionForm() {
                     onChange={handleChange}
                     className="border-b border-t-0 border-l-0 border-r-0 rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                   />
-
                   <Input
                     id="cardNumber"
                     placeholder="Card Number"
@@ -189,7 +182,7 @@ export default function SubscriptionForm() {
                     className="border-b border-t-0 border-l-0 border-r-0 rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                   />
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Input
                       id="expireDate"
                       placeholder="MM/YY"
@@ -202,17 +195,22 @@ export default function SubscriptionForm() {
                       id="cvv"
                       placeholder="CVV"
                       maxLength={3}
-                      type="password" // Hide CVV while typing
+                      type="password"
                       value={formData.cvv}
                       onChange={(e) =>
-                        setFormData({ ...formData, cvv: e.target.value.replace(/\D/g, "") })
+                        setFormData({
+                          ...formData,
+                          cvv: e.target.value.replace(/\D/g, ""),
+                        })
                       }
                       className="border-b border-t-0 border-l-0 border-r-0 rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                     />
                   </div>
                 </div>
 
-                {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
+                {errorMessage && (
+                  <p className="text-red-500 text-sm">{errorMessage}</p>
+                )}
 
                 <Button
                   type="submit"
@@ -228,7 +226,7 @@ export default function SubscriptionForm() {
 
       {/* Success Popup */}
       {isPopupVisible && (
-        <div className="absolute top-10 center bg-green-600 text-white px-4 py-2 rounded shadow-lg">
+        <div className="fixed top-10 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded shadow-lg z-50">
           Completed!
         </div>
       )}
