@@ -6,7 +6,7 @@ export default function FileUpload() {
   const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const onDrop = useCallback((acceptedFiles: File[], fileRejections) => {
+  const onDrop = useCallback((acceptedFiles: File[], fileRejections: string | any[]) => {
     if (fileRejections.length > 0) {
       const { errors } = fileRejections[0];
       setError(errors[0].message);
